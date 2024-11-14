@@ -16,11 +16,14 @@ import (
 	"os"
 	"log"
 
-	autodns "github.com/till/libdns-autodns"
+	"github.com/libdns/autodns"
 )
 
 func main() {
-	provider := autodns.NewWithDefaults(os.Getenv("AUTODNS_USERNAME"), os.Getenv("AUTODNS_PASSWORD"))
+	provider := autodns.Provider{
+		Username: os.Getenv("AUTODNS_USERNAME"),
+		Password: os.Getenv("AUTODNS_PASSWORD"),
+	}
 
 	records, err := provider.GetRecords(context.TODO(), "zone.example.org")
 	if err != nil {
@@ -33,10 +36,10 @@ func main() {
 
 As an alternative, configure the provider struct with the following:
 
-| Field      | Description                | Required |
+| Field      | Description (default)      | Required |
 |------------|----------------------------|----------|
-| Username   | username                   | yes      |
-| Password   | password                   | yes      |
+| Username   | username, empty            | yes      |
+| Password   | password, empty            | yes      |
 | Endpoint   | https://api.autodns.com/v1 | no       |
 | Context    | 4                          | no       |
-| httpClient | `&http.Client{}`           | no       |
+| HttpClient | `&http.Client{}`           | no       |

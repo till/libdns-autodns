@@ -21,7 +21,7 @@ type Provider struct {
 	Endpoint   string `json:"Endpoint"`
 	Context    string `json:"context"`
 	Primary    string `json:"primary"`
-	httpClient *http.Client
+	HttpClient *http.Client
 }
 
 // NewWithDefaults is a convenience method to create the provider with sensible defaults.
@@ -31,7 +31,7 @@ func NewWithDefaults(username, password string) *Provider {
 		Password:   password,
 		Endpoint:   autoDNSendpoint,
 		Context:    autoDNScontext,
-		httpClient: &http.Client{},
+		HttpClient: &http.Client{},
 	}
 }
 

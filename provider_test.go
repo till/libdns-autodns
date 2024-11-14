@@ -5,7 +5,7 @@ import (
 	"os"
 	"testing"
 
-	autodns "github.com/till/libdns-autodns"
+	"github.com/libdns/autodns"
 )
 
 func TestProvider(t *testing.T) {

@@ -54,10 +54,10 @@ func (p *Provider) getAutoDNSContext() string {
 // makeRequest executes the request.
 func (p *Provider) makeRequest(req *http.Request) (*http.Response, error) {
 	var client *http.Client
-	if p.httpClient == nil {
-		client = p.httpClient
+	if p.HttpClient == nil {
+		client = p.HttpClient
 	} else {
-		client = p.httpClient
+		client = p.HttpClient
 	}
 
 	resp, err := client.Do(req)

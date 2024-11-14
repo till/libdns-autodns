@@ -1,4 +1,4 @@
-module github.com/till/libdns-autodns
+module github.com/libdns/autodns
 
 go 1.18
 
