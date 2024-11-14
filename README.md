@@ -1,26 +1,45 @@
-**DEVELOPER INSTRUCTIONS:**
 
-This repo is a template for developers to use when creating new [libdns](https://github.com/libdns/libdns) provider implementations.
-
-Be sure to update:
-
-- The package name
-- The Go module name in go.mod
-- The latest `libdns/libdns` version in go.mod
-- All comments and documentation, including README below and godocs
-- License (must be compatible with Apache/MIT)
-- All "TODO:"s is in the code
-- All methods that currently do nothing
-
-Remove this section from the readme before publishing.
-
----
-
-\<PROVIDER NAME\> for [`libdns`](https://github.com/libdns/libdns)
+\<autodns\> for [`libdns`](https://github.com/libdns/libdns)
 =======================
 
-[![Go Reference](https://pkg.go.dev/badge/test.svg)](https://pkg.go.dev/github.com/libdns/TODO:PROVIDER_NAME)
+[![Go Reference](https://pkg.go.dev/badge/test.svg)](https://pkg.go.dev/github.com/libdns/autodns)
 
-This package implements the [libdns interfaces](https://github.com/libdns/libdns) for \<PROVIDER\>, allowing you to manage DNS records.
+This package implements the [libdns interfaces](https://github.com/libdns/libdns) for \<autodns\>, allowing you to manage DNS records.
 
-TODO: Show how to configure and use. Explain any caveats.
+Example:
+
+```
+package main
+
+import (
+	"context"
+	"os"
+	"log"
+
+	"github.com/libdns/autodns"
+)
+
+func main() {
+	provider := autodns.Provider{
+		Username: os.Getenv("AUTODNS_USERNAME"),
+		Password: os.Getenv("AUTODNS_PASSWORD"),
+	}
+
+	records, err := provider.GetRecords(context.TODO(), "zone.example.org")
+	if err != nil {
+		log.Fatalf("unexpected error: %s", err)
+	}
+
+	fmt.Printf("%#v", records)
+}
+```
+
+As an alternative, configure the provider struct with the following:
+
+| Field      | Description (default)      | Required |
+|------------|----------------------------|----------|
+| Username   | username, empty            | yes      |
+| Password   | password, empty            | yes      |
+| Endpoint   | https://api.autodns.com/v1 | no       |
+| Context    | 4                          | no       |
+| HttpClient | `&http.Client{}`           | no       |
