@@ -11,6 +11,11 @@ import (
 
 // buildRequest prepares the request with authentication headers and optional payload
 func (p *Provider) buildRequest(ctx context.Context, method, url string, payload any) (req *http.Request, err error) {
+	if p.Username == "" || p.Password == "" {
+		err = fmt.Errorf("missing username and/or password")
+		return
+	}
+
 	req, err = http.NewRequestWithContext(ctx, method, url, nil)
 	if err != nil {
 		err = fmt.Errorf("error creating request: %v", err)
