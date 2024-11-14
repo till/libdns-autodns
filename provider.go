@@ -21,7 +21,7 @@ type Provider struct {
 	Endpoint   string `json:"Endpoint"`
 	Context    string `json:"context"`
 	Primary    string `json:"primary"`
-	HttpClient *http.Client
+	HTTPClient *http.Client `json:"-"`
 }
 
 // NewWithDefaults is a convenience method to create the provider with sensible defaults.
